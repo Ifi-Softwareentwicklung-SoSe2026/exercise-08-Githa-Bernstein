@@ -84,8 +84,9 @@ Die for-Schleife zählt in Fünfer-Schritten hoch um das Laden der Programme zu 
         {
             Console.WriteLine($"  Warning: {step} is only halfway done.");
         }
+//Ladebalken "bewegt" bewegt sich in für Menchen sichtbare Geschwindigkeit
+        Thread.Sleep(80); 
 
-        Thread.Sleep(80);
     }
 ```
 
