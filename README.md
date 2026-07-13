@@ -75,27 +75,69 @@ Beantworte vor den Codeänderungen kurz:
 1. Welche Teile des Codes gehören zur Prozesslogik?
 
 ```text
-Hier Antwort einfügen
+Die for-Schleife zählt in Fünfer-Schritten hoch um das Laden der Programme zu simmulieren
+	for (int percent = 0; percent <= 100; percent += 5)
+    {
+        DrawProgressBar(step, percent);
+
+        if (percent == 50)
+        {
+            Console.WriteLine($"  Warning: {step} is only halfway done.");
+        }
+
+        Thread.Sleep(80);
+    }
 ```
 
 2. Welche Teile gehören zur Konsolenvisualisierung?
 
 ```text
-Hier Antwort einfügen
+Ausblenden Cursor:
+	Console.CursorVisible = false;
+
+Überschrift mit Zeilenumsprung;
+	Console.WriteLine("=== Process Simulator ===");
+    Console.WriteLine();
+
+Visualisierung der Balken:
+	Console.Write($"\r{stepName,-22} {barStartChar}{bar}{barEndChar} {percent,3}%");
 ```
 
 
 3. Welche Teile wären in einer GUI- oder Webanwendung schwer wiederverwendbar?
 
 ```text
-Hier Antwort einfügen
+Die geschachtelte Schleife ist schwer wiederverwendbar, da diese nicht in einer eigenen Methode steht
+    foreach (string step in steps)
+    {
+        Console.WriteLine($"Starting: {step}");
+
+        for (int percent = 0; percent <= 100; percent += 5)
+        {
+			DrawProgressBar(step, percent);
+
+            if (percent == 50)
+            {
+                Console.WriteLine($"  Warning: {step} is only halfway done.");
+            }
+
+            Thread.Sleep(80);
+        }
+
+            Console.WriteLine($"Completed: {step}");
+            Console.WriteLine();
+        }
 ```
 
 
 4. Was müsstest du ändern, wenn du Logging hinzufügen willst?
 
 ```text
-Hier Antwort einfügen
+Änderungsbedarf: Anstatt die Balken nur zu visualisieren könnte man jeden Fortschritt in einer Liste speichern.
+	Console.Write($"\r{stepName,-22} {barStartChar}{bar}{barEndChar} {percent,3}%");
+
+Änderungsbedarf: Aktuell zeigen wir nur im Terminal, dass der Prozess 50% erreicht hat. Wir könnten das intern speichern.
+	Console.WriteLine("All process steps completed.");
 ```
 
 
