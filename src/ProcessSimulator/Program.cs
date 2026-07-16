@@ -34,14 +34,7 @@ internal class Program
 
             for (int percent = 0; percent <= 100; percent += 5)
             {
-                
                 progress(step,percent);
-
-                if (percent == 50)
-                {
-                    Console.WriteLine($"  Warning: {step} is only halfway done.");
-                }
-
                 Thread.Sleep(80);
             }
 
@@ -67,6 +60,11 @@ internal class Program
 
         string bar = new string(filledChar, filled) + new string(emptyChar, width - filled);
         Console.Write($"\r{stepName,-22} {barStartChar}{bar}{barEndChar} {percent,3}%");
+
+        if (percent == 50)
+        {
+            Console.WriteLine($"  Warning: {stepName} is only halfway done.");
+        }
 
         if (percent == 100)
         {
