@@ -22,13 +22,21 @@ internal class Program
             "Cleaning up"
         };
 
+        RunSimulation(steps, DrawProgressBar);
+
+        Console.WriteLine("All process steps completed.");
+        Console.CursorVisible = true;
+    }
+
+    private static void RunSimulation( string[] steps, ProgressReporter progress)
+    {
         foreach (string step in steps)
         {
             Console.WriteLine($"Starting: {step}");
 
             for (int percent = 0; percent <= 100; percent += 5)
             {
-                ProgressReporter progress = DrawProgressBar;
+                
                 progress(step,percent);
 
                 if (percent == 50)
@@ -41,10 +49,7 @@ internal class Program
 
             Console.WriteLine($"Completed: {step}");
             Console.WriteLine();
-        }
-
-        Console.WriteLine("All process steps completed.");
-        Console.CursorVisible = true;
+        } 
     }
 
    
