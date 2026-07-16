@@ -8,9 +8,6 @@ internal class Program
 {
     private static void Main()
     {
-        Console.CursorVisible = false;
-        Console.WriteLine("=== Process Simulator ===");
-        Console.WriteLine();
 
         string[] steps =
         {
@@ -23,13 +20,14 @@ internal class Program
         };
 
         RunSimulation(steps, DrawProgressBar);
-
-        Console.WriteLine("All process steps completed.");
-        Console.CursorVisible = true;
     }
 
     private static void RunSimulation( string[] steps, ProgressReporter progress)
     {
+        Console.CursorVisible = false;
+        Console.WriteLine("=== Process Simulator ===");
+        Console.WriteLine();
+
         foreach (string step in steps)
         {
             Console.WriteLine($"Starting: {step}");
@@ -50,6 +48,9 @@ internal class Program
             Console.WriteLine($"Completed: {step}");
             Console.WriteLine();
         } 
+
+        Console.WriteLine("All process steps completed.");
+        Console.CursorVisible = true;
     }
 
    
