@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 
 namespace ProcessSimulator;
+public delegate void ProgressReporter(string stepName, int percent);
 
 internal class Program
 {
@@ -27,7 +28,8 @@ internal class Program
 
             for (int percent = 0; percent <= 100; percent += 5)
             {
-                DrawProgressBar(step, percent);
+                ProgressReporter progress = DrawProgressBar;
+                progress(step,percent);
 
                 if (percent == 50)
                 {
@@ -44,6 +46,8 @@ internal class Program
         Console.WriteLine("All process steps completed.");
         Console.CursorVisible = true;
     }
+
+   
 
     private static void DrawProgressBar(string stepName, int percent)
     {
